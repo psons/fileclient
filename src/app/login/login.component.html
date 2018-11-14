@@ -1,0 +1,15 @@
+
+<form (ngSubmit)="onLoginEmail()">
+  <div >
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" name="email" required [(ngModel)]="email">
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required [(ngModel)]="password">
+  </div>
+
+  <button type="submit" >Log In</button>
+</form>
+<button (click)="logout()"> Logout </button>

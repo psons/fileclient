@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/resetpgs.css";
+/*
+size strategy is to minimally specify size letting inner componets specify a min- height or width
+to push things out,
+and outer .app-root-container to constrain things with max- height or width.
+
+ Trying to style on top of HTML5 semantics.
+
+ I think the following top level structure has decent general (re)use:
+ div class="app-root-container"
+  header
+    h1
+      Welcome to {{ title | titlecase}}!
+  nav
+    div [routerLink]="['SomeTab']" routerLinkActive="active-tab" class="tab"
+      Dashboard
+    div [routerLink]="['AnotherTab']" routerLinkActive="active-tab" class="tab"
+      Search History
+  main
+    router-outlet
+  footer Copyright 2018 Paul Sons
+
+
+I think within the router outlet will exist something like:
+  section class="user-input-section">
+    User input section
+
+  section class="user-interaction-section"
+    User interaction section
+
+*/
+
+.app-root-container {
+  max-width: 400px;
+  font-family: arial;
+  font-size: 16px;
+}
+
+.app-root-container > header {
+  /*width: 800px;*/
+  background-color: #b8b8e0;
+}
+.app-root-container > header >h2 {
+  text-align: center;
+  padding: .25em;
+  font-size: 2em;
+}
+
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+.app-root-container > nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: #4d94ff;
+  border-style: solid;
+  border-width: 0 1em 0 1em;
+  border-color: #b8b8e0;
+}
+
+.app-root-container > nav > .tab {
+  border-style: solid;
+  border-width: 0 1em 0 1em;
+  border-color: #b8b8e0;
+  font-size: 1em;
+  text-align: center;
+  vertical-align: middle;
+  flex-grow: 1;
+  padding: .4em .2em .4em .2em;
+}
+
+
+.app-root-container > nav > .inactive-tab {
+  background-color: #4d94ff;
+}
+
+.app-root-container > nav > .active-tab {
+  background-color: #cce0ff;
+}
+.app-root-container > main {
+  border-style: solid;
+  border-width: 0 1em 0 1em;
+  border-color: #b8b8e0;
+  background-color: #cce0ff;
+  min-height: 300px;
+  padding: 2em;
+}
+.app-root-container > footer {
+  background-color: #b8b8e0;
+  text-align: center;
+  font-size: .6em;
+  padding: .2em;
+}
+
+.user-interaction > figure > figcaption {
+  padding: .4em 0 .4em 0;
+}
+
+.user-interaction > figure {
+  width: 300px;
+}

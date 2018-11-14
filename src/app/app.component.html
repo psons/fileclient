@@ -1,0 +1,23 @@
+
+<div class="app-root-container">
+  <header>
+    <h1>
+      Welcome to {{ title | titlecase}}!
+    </h1>
+  </header>
+  <nav>
+    <div [routerLink]="['Objects']" routerLinkActive="active-tab" class="tab">
+      Objects
+    </div>
+    <div [routerLink]="['Admin']" routerLinkActive="active-tab" class="tab">
+      Admin
+    </div>
+    <div [routerLink]="['Login']" routerLinkActive="active-tab" class="tab">
+      Login
+    </div>
+  </nav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer>Copyright 2018 Paul Sons </footer>
+</div>

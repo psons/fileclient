@@ -1,0 +1,11 @@
+<!--This component lists the objects from the object store (e. g. S3-->
+<input type="text" #prefixinput
+       [value]="'root/'"
+       (keydown.enter)="this.getObjectListAsStrings(prefixinput.value)" >
+<button (click)="this.getObjectListAsStrings(prefixinput.value)"> Get Object List (bug requires click 2 or 3 times) </button>
+<ol>
+  <li *ngFor="let object of this.objects">{{object.Key}}</li>
+</ol>
+<!--<div>-->
+  <!--{{this.objectStoreService.objectListing|json}}-->
+<!--</div>-->
