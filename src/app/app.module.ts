@@ -13,6 +13,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireModule} from '@angular/fire';
 import {firebaseConfig} from '../environments/environment';
 import {CommonModule} from '@angular/common';
+import {AuthGuard} from './login/auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {CommonModule} from '@angular/common';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
-  providers: [LoginService],
+  providers: [LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

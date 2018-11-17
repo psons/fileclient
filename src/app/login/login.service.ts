@@ -13,14 +13,27 @@ import * as firebase from 'firebase/app';
 export class LoginService {
   authState: Observable<{} | null>;
 
-  user: Observable<{} | null>;
+  user: Observable<{} | null>; // this is used by the authguard
   userUid: string;
   sessionKey: string;
 
   /*
-  The constructor fetches the user as an observable.
-    the maybe updates info about the user, if anything ever subscribes to this.user.
-      as of 2018-11-14 this is dead code in the fileclient app, since nothing subscribes.
+  The constructor creates this.user as an unsubscribed observable which,
+  later when subscribed will :
+    - call afAuth.authState, which will emit user data if the user is logged in.
+    - .update the the e-mail in Firebase
+    - .then return an observable listening for .valuechanges
+
+  The authState is set by loginWithEmail() when a user actually logs in, and only then
+  does the code in the constructor fire.  This is very wierd to me, that things
+  in the constructor happen only later when an instance methof is called.
+
+  It is AngularFireAuth.authState that deals with part of the
+  database managed by the Firebase service to log in the user.
+
+  The Authguard and Admin guard possibly cause the user observabe to be subscribed
+  when they access the user via authState, which is the same place this code seems to get
+  part of the observable chain.
    */
   constructor(
     private afAuth: AngularFireAuth,
@@ -71,7 +84,7 @@ export class LoginService {
         const sessionPayloads: any = {};
         sessionPayloads[`currentSession/${auth.user.uid}`] = sessionPayload;
         sessionPayloads[`users/${auth.user.uid}/sessions/${this.sessionKey}`] = {'createdAt': createdAt};
-        console.log('sessionPayloads', sessionPayloads )
+        console.log('sessionPayloads', sessionPayloads );
         return this.db.database.ref().update(sessionPayloads);
       })
       .catch(error => {

@@ -26,7 +26,7 @@ Log in to retrieve S3 credential settings from Firestore
 ### 'Objects' SCREEN
  
  Display S3 “root” prefix an upload target prefix (directory)
- - UI working, but problems with the list-all-objects library.
+ - UI working, rippedout the list-all-objects library.  using was sdk directly
 #### Stories 
 1. Build a component template
  Show a clickable listing of existing prefixes one separator longer than the root prefix (subdirectories)
