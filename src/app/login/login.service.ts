@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-// import {switchMap} from 'rxjs/operators';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { AngularFireDatabase } from '@angular/fire/database';
-// import * as firebase from 'firebase';
 import * as firebase from 'firebase/app';
+import {UserDataService} from './user-data.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
-  authState: Observable<{} | null>;
-
   user: Observable<{} | null>; // this is used by the authguard
-  userUid: string;
-  sessionKey: string;
+  userUid = '';
+  sessionKey = '';
 
   /*
   The constructor creates this.user as an unsubscribed observable which,
@@ -31,14 +30,14 @@ export class LoginService {
   It is AngularFireAuth.authState that deals with part of the
   database managed by the Firebase service to log in the user.
 
-  The Authguard and Admin guard possibly cause the user observabe to be subscribed
+  The Authuard and Admin guard possibly cause the user observabe to be subscribed
   when they access the user via authState, which is the same place this code seems to get
   part of the observable chain.
    */
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
   ) {
     console.log('Constructor for LoginService ', typeof this.db);
     this.user = this.afAuth.authState
@@ -93,9 +92,9 @@ export class LoginService {
       });
   }
 
-  signOut() {
-    // TODO Cleanup: This allways throws ERROR: ... Client doesn't have permission to access the desired data
-    this.afAuth.auth.signOut();
-    this.router.navigate(['/']);
+  reset(){
+    this.user = new Observable(null);
+    this.userUid = '';
+    this.sessionKey = '';
   }
 }

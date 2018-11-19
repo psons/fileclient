@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ObjectStoreService } from './object-store.service';
+import { MessagesService } from './messages.service';
 
-describe('ObjectStoreService', () => {
+describe('MessagesService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ObjectStoreService = TestBed.get(ObjectStoreService);
+    const service: MessagesService = TestBed.get(MessagesService);
     expect(service).toBeTruthy();
   });
 });

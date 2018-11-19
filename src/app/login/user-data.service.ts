@@ -1,36 +1,41 @@
 import { Injectable } from '@angular/core';
 import {LoginService} from './login.service';
 import {AngularFireDatabase} from '@angular/fire/database';
-import {forkJoin, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
+import {MessagesService} from '../messages.service';
 
 /*Service to house calls to get data about the user from fire base*/
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserDataService {
   public userDataRef: any;
   private userAwsObject: any;
-  private userAwsObjectIsSet = false;
+  public userAwsObjectIsSet = false;
 
   constructor(
     private loginService: LoginService,
     private db: AngularFireDatabase,
+    // private messagesService: MessagesService,
   ) {
     this.userDataRef = this.db
       .object(`users/${this.loginService.userUid}`).valueChanges();
+    // this.userDataObjectSubscriber();
+  }
 
-    const udoSubscription = this.getUserObject().subscribe(
+  public userDataObjectSubscriber() {
+    const udoSubscription = this.getUserObjectObservable().subscribe(
       (connectObject) => {
         this.userAwsObject = connectObject;
+        console.log('in Subscribe callback, this.userAwsObject:' +
+          JSON.stringify(this.userAwsObject));
         this.userAwsObjectIsSet = true;
       },
-      (error) => console.error('getUserObject() failed: ' + error),
-      () => console.log('getUserObject() is done. this.userAwsObjectIsSet: '
-          + this.userAwsObjectIsSet
-          + JSON.stringify(this.userAwsObject)
+      (error) => console.error('getUserObjectObservable() failed: ' + error),
+      () => console.log('getUserObjectObservable() is complete. this.userAwsObjectIsSet: '
+        + this.userAwsObjectIsSet
+        + JSON.stringify(this.userAwsObject)
       )
-      );
+    );
   }
 
   getUserAwsObject() {
@@ -43,7 +48,7 @@ export class UserDataService {
     }
   }
   // called directly by deprecated methods in the ObjectStoreService
-  getUserObject(): Observable<any> {
+  getUserObjectObservable(): Observable<any> {
     const keyString = `users/${this.loginService.userUid}`;
     const value = 'connectObject';
     console.log(`getUserObject() searching for keyString: ${keyString} value: ${value}` );
@@ -52,4 +57,9 @@ export class UserDataService {
     return theQuery.valueChanges();
   }
 
+  reset(){
+    this.userAwsObject = null;
+    this.userAwsObjectIsSet = false;
+    // this.messagesService.add('userAwsObject', 'set to null.');
+  }
 }

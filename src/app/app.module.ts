@@ -8,22 +8,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {LoginService} from './login/login.service';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireModule} from '@angular/fire';
 import {firebaseConfig} from '../environments/environment';
 import {CommonModule} from '@angular/common';
 import {AuthGuard} from './login/auth.guard';
+import {AdminGuard} from './login/admin.guard';
+import {RouterModule} from '@angular/router';
+import { MessageDetailComponent } from './admin/message-detail/message-detail.component';
+import {UserDataService} from './login/user-data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ObjectsComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    MessageDetailComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
@@ -31,7 +37,14 @@ import {AuthGuard} from './login/auth.guard';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
-  providers: [LoginService, AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [
+    AngularFireAuth,
+    LoginService,
+    UserDataService,
+    AuthGuard,
+    AdminGuard,
+    AngularFireAuth,
+  ],
+  bootstrap: [AppComponent, ]
 })
 export class AppModule { }

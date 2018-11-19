@@ -1,16 +1,9 @@
-<!--This component lists the objects from the object store (e. g. S3-->
-<!--<input type="text" #prefixinput-->
-       <!--[value]="'root/'"-->
-       <!--(keydown.enter)="this.getObjectListAsStrings(prefixinput.value)" >-->
-<!--<button (click)="this.getObjectListAsStrings(prefixinput.value)"> Get Object List (bug requires click 2 or 3 times) </button>-->
+<button (click)="showFiles(prefixinput.value, true)"> List S3</button>
 <input type="text" #prefixinput
        [value]="'root/'"
        (keydown.enter)="showFiles(prefixinput.value, true)" >
-<button (click)="showFiles(prefixinput.value, true)"> Run new code to get AWs listing </button>
 
 <ol>
   <li *ngFor="let file of fileUploads | async">{{file.name}}</li>
 </ol>
-<!--<div>-->
-  <!--{{this.objectStoreService.objectListing|json}}-->
-<!--</div>-->
+

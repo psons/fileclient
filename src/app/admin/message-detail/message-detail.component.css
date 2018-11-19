@@ -1,0 +1,14 @@
+.event-message-holder {
+  display: flex;
+}
+
+.event {
+  width: 20em;
+  font-size: 14px;
+  font-weight: bolder;
+  background-color: #f2ccff;
+}
+.message {
+  font-size: 8px;
+  background-color: #ccccff;
+}

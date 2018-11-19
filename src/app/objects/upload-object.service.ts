@@ -18,7 +18,7 @@ export class UploadObjectService {
   secretAccessKey: string;
 
   constructor(private userDataService: UserDataService) {
-    this.userDataService.getUserObject();
+    this.userDataService.getUserObjectObservable();
   }
 
   private getS3Bucket(): any {

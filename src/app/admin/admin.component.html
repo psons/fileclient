@@ -1,3 +1,8 @@
-<p>
-  admin works!
-</p>
+<h2>{{ title | titlecase}}</h2>
+<div *ngIf="messageService.messages.length">
+  <button class="clear"
+          (click)="this.messageService.clear()">clear</button>
+  <div *ngFor='let message of messageService.messages'>
+    <app-message-detail [eventMessage]="message"></app-message-detail>
+  </div>
+</div>

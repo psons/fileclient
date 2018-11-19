@@ -8,7 +8,9 @@ import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private authService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -21,9 +23,13 @@ export class AuthGuard implements CanActivate {
     // console.log(this.auth.isAdmin());
     // console.log('IS ADMIN IS ADMIN IS ADMIN');
 
-    return this.authService.user.pipe(
+    return this.loginService.user.pipe(
       take(1),
-      map((user) => !!user),  // in this stage
+      map(function(user) {
+        // console.log('the user in AuthGuard is:' + JSON.stringify(user));
+        return !!user;
+      }
+      ),
       tap((loggedIn) => {
         if (!loggedIn) {
           console.log('Admin access denied');
