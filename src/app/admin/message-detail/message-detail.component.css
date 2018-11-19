@@ -3,12 +3,16 @@
 }
 
 .event {
-  width: 20em;
+  max-width: 20em;
+  margin: 4px 0 4px 0;
+  padding: 4px 0 4px 0;
   font-size: 14px;
   font-weight: bolder;
   background-color: #f2ccff;
 }
 .message {
+  margin: 4px 0 4px 0;
+  padding: 4px 0 4px 0;
   font-size: 8px;
   background-color: #ccccff;
 }

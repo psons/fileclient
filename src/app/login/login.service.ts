@@ -92,8 +92,8 @@ export class LoginService {
       });
   }
 
-  reset(){
-    this.user = new Observable(null);
+  reset() {
+    // this.user = Observable.of(null); TODO likely security bug not zeroing out user here.
     this.userUid = '';
     this.sessionKey = '';
   }
