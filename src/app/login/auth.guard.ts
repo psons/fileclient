@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
       ),
       tap((loggedIn) => {
         if (!loggedIn) {
-          console.log('Admin access denied');
+          console.log('Access denied');
           this.router.navigate(['']);
         }
       }),

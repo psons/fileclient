@@ -1,9 +1,11 @@
 .event-message-holder {
   display: flex;
+  /*grid-template-areas: "event message message message";*/
 }
 
 .event {
-  max-width: 20em;
+  /*grid-area: event;*/
+  width: 30%;
   margin: 4px 0 4px 0;
   padding: 4px 0 4px 0;
   font-size: 14px;
@@ -11,8 +13,11 @@
   background-color: #f2ccff;
 }
 .message {
+  /*grid-area: message;*/
+  width: 70%;
   margin: 4px 0 4px 0;
   padding: 4px 0 4px 0;
   font-size: 8px;
   background-color: #ccccff;
+  /*flex-grow: ;*/
 }

@@ -24,13 +24,13 @@ export class LoginService {
     - .then return an observable listening for .valuechanges
 
   The authState is set by loginWithEmail() when a user actually logs in, and only then
-  does the code in the constructor fire.  This is very wierd to me, that things
-  in the constructor happen only later when an instance methof is called.
+  does the code in the constructor fire.  This is very weird to me, that things
+  in the constructor happen only later when an instance method is called.
 
   It is AngularFireAuth.authState that deals with part of the
   database managed by the Firebase service to log in the user.
 
-  The Authuard and Admin guard possibly cause the user observabe to be subscribed
+  The Auth guard and Admin guard possibly cause the user observable to be subscribed
   when they access the user via authState, which is the same place this code seems to get
   part of the observable chain.
    */
