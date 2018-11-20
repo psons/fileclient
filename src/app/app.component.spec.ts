@@ -3,13 +3,21 @@ import { AppComponent } from './app.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {MessageDetailComponent} from './admin/message-detail/message-detail.component';
+import {AdminComponent} from './admin/admin.component';
+import {ObjectsComponent} from './objects/objects.component';
+import {LoginComponent} from './login/login.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, FormsModule],
       providers: [AngularFireAuth],
       declarations: [
-        AppComponent
+        AppComponent,
+        ObjectsComponent,
+        AdminComponent,
+        LoginComponent,
+        MessageDetailComponent,
       ],
     }).compileComponents();
   }));
